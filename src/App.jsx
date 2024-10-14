@@ -13,7 +13,7 @@ function App() {
   const [teams, setTeams] = useState([]);
   const [playersPerTeam] = useState(2);
 
-  const handleAddPlayer = (e) => {
+  const handleAddPlayer = () => {
     setListOfPlayers([...listOfPlayers, player])
     if (teams.length !== 0) {
       if (teams[teams.length - 1].length < playersPerTeam) {
@@ -46,8 +46,18 @@ function App() {
     }
   }
 
-  const nextGame = () => {
-
+  const nextGame = (teamId) => {
+    let team = teams[teamId];
+    if (teams[teams.length - 1].length < playersPerTeam) {
+      console.log("Times nao estao fechados.")
+      const tempArray = [...teams[teams.length - 1], ...team];
+      console.log(tempArray)
+      team = tempArray.splice(0, playersPerTeam);
+      setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
+    } else {
+      console.log("Times estao fechados.")
+      setTeams((prevValue) => [...prevValue, [...team]])
+    }
   }
 
   return (
@@ -56,8 +66,8 @@ function App() {
       <ButtonDefault handleClickBtn={handleAddPlayer} btnTxt={"Adicionar"} />
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
-      <ListOfGames teams={teams} />
-      <ButtonDefault handleClickBtn={nextGame} btnTxt={"Próximo jogo"}/>
+      <ListOfGames teams={teams} handleNextGame={nextGame} />
+      {/* <ButtonDefault handleClickBtn={() => nextGame(test)} btnTxt={"Próximo jogo"} /> */}
     </div>
   )
 }
