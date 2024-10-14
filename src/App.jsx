@@ -1,14 +1,17 @@
 import React from 'react'
 import './App.css'
 import { useState } from 'react'
+import InputDefault from './components/InputDefault';
+import ListOfPlayers from './components/ListOfPlayers';
+import ButtonDefault from './components/ButtonDefault';
+import ListOfGames from './components/ListOfGames';
 
 function App() {
 
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
-  // const [drawnPlayers, setDrawnPlayers] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(5);
+  const [playersPerTeam] = useState(2);
 
   const handleAddPlayer = (e) => {
     setListOfPlayers([...listOfPlayers, player])
@@ -25,7 +28,6 @@ function App() {
   const drawPlayers = () => {
     const newList = listOfPlayers.map((player) => player);
     shuffleArray(newList);
-    // setDrawnPlayers([...newList]);
     let i = 0;
     while (newList.length >= playersPerTeam) {
       const tempArray = newList.splice(0, playersPerTeam);
@@ -38,28 +40,11 @@ function App() {
 
   return (
     <div>
-      <div className="input-group">
-        <label htmlFor="player-name">Insira o nome do jogador:</label>
-        <input id='player-name' name='player-name' type="text" onChange={(e) => setPlayer(e.target.value)} />
-        <button onClick={handleAddPlayer}>Adicionar</button>
-      </div>
-      <ul>
-        {listOfPlayers.map((player, i) => (
-          <li key={i}>{i + 1} - {player}</li>
-        ))}
-      </ul>
-
-      <button onClick={drawPlayers}>Sortear times</button>
-
-      <div className='list'>
-        {teams.map((team, i) => (
-          <ul key={i}>
-            {team.map((player, i) => (
-              <li key={i}>{i + 1} - {player}</li>
-            ))}
-          </ul>
-        ))}
-      </div>
+      <InputDefault id={"player-name"} labelTxt={"Insira o nome do jogador:"} handleChangeInput={(e) => setPlayer(e.target.value)} />
+      <ButtonDefault handleClickBtn={handleAddPlayer} btnTxt={"Adicionar"} />
+      <ListOfPlayers list={listOfPlayers} />
+      <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
+      <ListOfGames teams={teams} />
     </div>
   )
 }
