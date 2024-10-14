@@ -11,7 +11,7 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(2);
+  const [playersPerTeam] = useState(5);
 
   const handleAddPlayer = () => {
     setListOfPlayers([...listOfPlayers, player])
@@ -49,13 +49,10 @@ function App() {
   const nextGame = (teamId) => {
     let team = teams[teamId];
     if (teams[teams.length - 1].length < playersPerTeam) {
-      console.log("Times nao estao fechados.")
       const tempArray = [...teams[teams.length - 1], ...team];
-      console.log(tempArray)
       team = tempArray.splice(0, playersPerTeam);
       setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
     } else {
-      console.log("Times estao fechados.")
       setTeams((prevValue) => [...prevValue, [...team]])
     }
   }
