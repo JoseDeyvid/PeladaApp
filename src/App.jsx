@@ -1,13 +1,14 @@
 import React from 'react'
 import './App.css'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 function App() {
 
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
-  const [drawnPlayers, setDrawnPlayers] = useState([]);
+  // const [drawnPlayers, setDrawnPlayers] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [playersPerTeam] = useState(5);
 
   const handleAddPlayer = (e) => {
     setListOfPlayers([...listOfPlayers, player])
@@ -24,34 +25,41 @@ function App() {
   const drawPlayers = () => {
     const newList = listOfPlayers.map((player) => player);
     shuffleArray(newList);
-    setDrawnPlayers([...newList]);
-  }
-
-  const handleTest = () => {
-    console.log(listOfPlayers)
-    console.log(drawnPlayers)
+    // setDrawnPlayers([...newList]);
+    let i = 0;
+    while (newList.length >= playersPerTeam) {
+      const tempArray = newList.splice(0, playersPerTeam);
+      setTeams((prevValue) => [...prevValue, tempArray]);
+    }
+    if (newList.length > 0) {
+      setTeams((prevValue) => [...prevValue, newList]);
+    }
   }
 
   return (
     <div>
       <div className="input-group">
-        <label htmlFor="">Insira o nome do jogador:</label>
-        <input type="text" onChange={(e) => setPlayer(e.target.value)} />
+        <label htmlFor="player-name">Insira o nome do jogador:</label>
+        <input id='player-name' name='player-name' type="text" onChange={(e) => setPlayer(e.target.value)} />
         <button onClick={handleAddPlayer}>Adicionar</button>
       </div>
       <ul>
         {listOfPlayers.map((player, i) => (
-          <li key={i}>{i+1} - {player}</li>
-        ))}
-      </ul>
-      <button onClick={drawPlayers}>Sortear times</button>
-      <ul>
-        {drawnPlayers.map((player, i) => (
-          <li key={i}>{player}</li>
+          <li key={i}>{i + 1} - {player}</li>
         ))}
       </ul>
 
-      <button onClick={handleTest}>test</button>
+      <button onClick={drawPlayers}>Sortear times</button>
+
+      <div className='list'>
+        {teams.map((team, i) => (
+          <ul key={i}>
+            {team.map((player, i) => (
+              <li key={i}>{i + 1} - {player}</li>
+            ))}
+          </ul>
+        ))}
+      </div>
     </div>
   )
 }

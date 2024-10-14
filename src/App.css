@@ -1,0 +1,9 @@
+.list {
+    display: flex;
+    text-align: start;
+}
+
+ul {
+    list-style-type: none;
+    border: 1px solid black;
+}
