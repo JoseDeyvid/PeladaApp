@@ -15,6 +15,14 @@ function App() {
 
   const handleAddPlayer = (e) => {
     setListOfPlayers([...listOfPlayers, player])
+    if (teams.length !== 0) {
+      if (teams[teams.length - 1].length < playersPerTeam) {
+        const tempArray = [...teams[teams.length - 1], player]
+        setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...tempArray]]);
+      } else {
+        setTeams((prevValue) => [...prevValue, [player]])
+      }
+    }
   }
 
   function shuffleArray(arr) {
@@ -38,6 +46,10 @@ function App() {
     }
   }
 
+  const nextGame = () => {
+
+  }
+
   return (
     <div>
       <InputDefault id={"player-name"} labelTxt={"Insira o nome do jogador:"} handleChangeInput={(e) => setPlayer(e.target.value)} />
@@ -45,6 +57,7 @@ function App() {
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
       <ListOfGames teams={teams} />
+      <ButtonDefault handleClickBtn={nextGame} btnTxt={"Próximo jogo"}/>
     </div>
   )
 }
