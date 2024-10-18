@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import { useState } from 'react'
 import InputDefault from './components/InputDefault';
@@ -11,7 +10,8 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(5);
+  const [playersPerTeam] = useState(2);
+  const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
 
   const handleAddPlayer = () => {
     setListOfPlayers([...listOfPlayers, player])
@@ -36,7 +36,6 @@ function App() {
   const drawPlayers = () => {
     const newList = listOfPlayers.map((player) => player);
     shuffleArray(newList);
-    let i = 0;
     while (newList.length >= playersPerTeam) {
       const tempArray = newList.splice(0, playersPerTeam);
       setTeams((prevValue) => [...prevValue, tempArray]);
@@ -47,14 +46,31 @@ function App() {
   }
 
   const nextGame = (teamId) => {
-    let team = teams[teamId];
-    if (teams[teams.length - 1].length < playersPerTeam) {
-      const tempArray = [...teams[teams.length - 1], ...team];
-      team = tempArray.splice(0, playersPerTeam);
-      setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
-    } else {
-      setTeams((prevValue) => [...prevValue, [...team]])
+    if (teamsPlaying.includes(teamId)) {
+      let team = teams[teamId];
+      if (teams[teams.length - 1].length < playersPerTeam) {
+        const tempArray = [...teams[teams.length - 1], ...team];
+        team = tempArray.splice(0, playersPerTeam);
+        setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
+      } else {
+        setTeams((prevValue) => [...prevValue, [...team]])
+      }
+
+      let newTeamPlaying;
+
+      if (teamsPlaying[0] > teamsPlaying[1]) {
+        newTeamPlaying = teamsPlaying[0] + 1;
+      } else {
+        newTeamPlaying = teamsPlaying[1] + 1;
+      }
+
+      if (teamsPlaying[0] === teamId) {
+        setTeamsPlaying([newTeamPlaying, teamsPlaying[1]])
+      } else {
+        setTeamsPlaying([teamsPlaying[0], newTeamPlaying])
+      }
     }
+
   }
 
   return (
@@ -63,8 +79,7 @@ function App() {
       <ButtonDefault handleClickBtn={handleAddPlayer} btnTxt={"Adicionar"} />
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
-      <ListOfGames teams={teams} handleNextGame={nextGame} />
-      {/* <ButtonDefault handleClickBtn={() => nextGame(test)} btnTxt={"Próximo jogo"} /> */}
+      <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} />
     </div>
   )
 }

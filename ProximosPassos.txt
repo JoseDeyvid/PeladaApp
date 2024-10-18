@@ -1,0 +1,6 @@
+- Adicionar cronometro
+- Adicionar opcao de encerrar partida
+- Resetar tudo
+- Adicionar opcao de tirar jogador
+- Adicionar opcao do "enter" inserir o jogador digitado
+- Se empatar, app sorteia o time

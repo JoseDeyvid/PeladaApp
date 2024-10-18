@@ -7,3 +7,8 @@ ul {
     list-style-type: none;
     border: 1px solid black;
 }
+
+.isPlaying {
+    background-color: red;
+    border: 5px solid black;
+}
