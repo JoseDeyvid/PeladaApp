@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ButtonDefault from "../ButtonDefault"
-import ModalWhoLost from "../ModalWhoLost";
-
-const Timer = ({ gameTime }) => {
+const Timer = ({ gameTime, setModalIsOpen }) => {
 
     const Ref = useRef(null);
     const [timer, setTimer] = useState(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
@@ -28,7 +26,6 @@ const Timer = ({ gameTime }) => {
     };
 
     const startTimer = (e) => {
-        console.log(Ref.current)
         let { total, hours, minutes, seconds } =
             getTimeRemaining(e);
         if (total >= 0) {
@@ -89,7 +86,8 @@ const Timer = ({ gameTime }) => {
     }
 
     const onClickFinishGame = () => {
-        setIsOpen(true);
+        setModalIsOpen(true);
+        clearInterval(Ref.current)
     }
 
     return (

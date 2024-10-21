@@ -5,14 +5,16 @@ import ListOfPlayers from './components/ListOfPlayers';
 import ButtonDefault from './components/ButtonDefault';
 import ListOfGames from './components/ListOfGames';
 import Timer from './components/Timer';
+import ModalWhoLost from './components/ModalWhoLost';
 
 function App() {
 
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(1);
+  const [playersPerTeam] = useState(2);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleAddPlayer = () => {
     setListOfPlayers([...listOfPlayers, player])
@@ -47,18 +49,16 @@ function App() {
   }
 
   const nextGame = (teamId) => {
-    if (teamsPlaying.includes(teamId)) {
-      let team = teams[teamId];
-      if (teams[teams.length - 1].length < playersPerTeam) {
-        const tempArray = [...teams[teams.length - 1], ...team];
-        team = tempArray.splice(0, playersPerTeam);
-        setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
-      } else {
-        setTeams((prevValue) => [...prevValue, [...team]])
-      }
-
-      redefineTeamsPlaying(teamId);
+    let team = teams[teamId];
+    if (teams[teams.length - 1].length < playersPerTeam) {
+      const tempArray = [...teams[teams.length - 1], ...team];
+      team = tempArray.splice(0, playersPerTeam);
+      setTeams((prevValue) => [...prevValue.filter((value) => value.length === playersPerTeam), [...team], [...tempArray]]);
+    } else {
+      setTeams((prevValue) => [...prevValue, [...team]])
     }
+    setModalIsOpen(false);
+    redefineTeamsPlaying(teamId);
 
   }
 
@@ -72,7 +72,7 @@ function App() {
     }
 
     if (teamsPlaying[0] === losingTeamId) {
-      setTeamsPlaying([newTeamPlaying, teamsPlaying[1]])
+      setTeamsPlaying([teamsPlaying[1], newTeamPlaying])
     } else {
       setTeamsPlaying([teamsPlaying[0], newTeamPlaying])
     }
@@ -85,7 +85,8 @@ function App() {
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
       <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} />
-      {teams.length > 0 && <Timer gameTime={8} />}
+      {teams.length > 0 && <Timer gameTime={8} setModalIsOpen={setModalIsOpen} />}
+      {modalIsOpen && <ModalWhoLost handleCloseModal={() => setModalIsOpen(false)} teams={teams} teamsPlayingId={teamsPlaying} handleNextGame={nextGame} />}
     </div>
   )
 }
