@@ -4,3 +4,4 @@
 - Adicionar opcao de tirar jogador
 - Adicionar opcao do "enter" inserir o jogador digitado
 - Se empatar, app sorteia o time
+- Necessário pelo menos 2 times para fazer sorteio

@@ -4,13 +4,14 @@ import InputDefault from './components/InputDefault';
 import ListOfPlayers from './components/ListOfPlayers';
 import ButtonDefault from './components/ButtonDefault';
 import ListOfGames from './components/ListOfGames';
+import Timer from './components/Timer';
 
 function App() {
 
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(2);
+  const [playersPerTeam] = useState(1);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
 
   const handleAddPlayer = () => {
@@ -56,21 +57,25 @@ function App() {
         setTeams((prevValue) => [...prevValue, [...team]])
       }
 
-      let newTeamPlaying;
-
-      if (teamsPlaying[0] > teamsPlaying[1]) {
-        newTeamPlaying = teamsPlaying[0] + 1;
-      } else {
-        newTeamPlaying = teamsPlaying[1] + 1;
-      }
-
-      if (teamsPlaying[0] === teamId) {
-        setTeamsPlaying([newTeamPlaying, teamsPlaying[1]])
-      } else {
-        setTeamsPlaying([teamsPlaying[0], newTeamPlaying])
-      }
+      redefineTeamsPlaying(teamId);
     }
 
+  }
+
+  const redefineTeamsPlaying = (losingTeamId) => {
+    let newTeamPlaying;
+
+    if (teamsPlaying[0] > teamsPlaying[1]) {
+      newTeamPlaying = teamsPlaying[0] + 1;
+    } else {
+      newTeamPlaying = teamsPlaying[1] + 1;
+    }
+
+    if (teamsPlaying[0] === losingTeamId) {
+      setTeamsPlaying([newTeamPlaying, teamsPlaying[1]])
+    } else {
+      setTeamsPlaying([teamsPlaying[0], newTeamPlaying])
+    }
   }
 
   return (
@@ -80,6 +85,7 @@ function App() {
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
       <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} />
+      {teams.length > 0 && <Timer gameTime={8} />}
     </div>
   )
 }
