@@ -1,6 +1,5 @@
 import './App.css'
-import { useState } from 'react'
-import InputDefault from './components/InputDefault';
+import { useRef, useState } from 'react'
 import ListOfPlayers from './components/ListOfPlayers';
 import ButtonDefault from './components/ButtonDefault';
 import ListOfGames from './components/ListOfGames';
@@ -12,9 +11,10 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(2);
+  const [playersPerTeam] = useState(5);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const inputPlayerRef = useRef();
 
   const handleAddPlayer = () => {
     setListOfPlayers([...listOfPlayers, player])
@@ -26,6 +26,10 @@ function App() {
         setTeams((prevValue) => [...prevValue, [player]])
       }
     }
+    console.log(inputPlayerRef)
+    inputPlayerRef.current.value = ''
+    inputPlayerRef.current.focus();
+
   }
 
   function shuffleArray(arr) {
@@ -79,9 +83,19 @@ function App() {
   }
 
   return (
-    <div>
-      <InputDefault id={"player-name"} labelTxt={"Insira o nome do jogador:"} handleChangeInput={(e) => setPlayer(e.target.value)} />
-      <ButtonDefault handleClickBtn={handleAddPlayer} btnTxt={"Adicionar"} />
+
+    <div className='container'>
+      <div className="add-player">
+        <input
+          id={'player-name'}
+          name={'player-name'}
+          type="text"
+          onChange={(e) => setPlayer(e.target.value)}
+          placeholder={'Nome do jogador...'}
+          className='input-default'
+          ref={inputPlayerRef} />
+        <ButtonDefault handleClickBtn={handleAddPlayer} btnTxt={"+"} />
+      </div>
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
       <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} />

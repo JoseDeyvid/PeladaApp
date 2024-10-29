@@ -1,7 +1,9 @@
-- Adicionar cronometro
-- Adicionar opcao de encerrar partida
 - Resetar tudo
 - Adicionar opcao de tirar jogador
-- Adicionar opcao do "enter" inserir o jogador digitado
+- Corrigir bug do valor do input ficar salvo por conta do setState e useRef
 - Se empatar, app sorteia o time
 - Necessário pelo menos 2 times para fazer sorteio
+- Adicionar opção de voltar a ação
+- Não permitir inserir jogador que já existe
+- Nao deixar inserir nome vazio
+- Deixar a primeira letra do nome sempre maiuscula

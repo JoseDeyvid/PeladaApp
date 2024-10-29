@@ -1,14 +1,30 @@
-.list {
-    display: flex;
+.list-of-games {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     text-align: start;
+    padding-top: 1rem;
+    gap: .4rem;
 }
 
-ul {
+.list-of-games ul {
     list-style-type: none;
-    border: 1px solid black;
+    border: 1px solid var(--dark-green);
+    color: var(--second-green);
+    padding: 0.4rem;
+    background-color: var(--white);
+    border-radius: 4px;
 }
 
-.isPlaying {
-    background-color: red;
-    border: 5px solid black;
+.list-of-games  li {
+    background-color: var(--white);
+    font-size: 18px;
+}
+
+.list-of-games .isPlaying {
+    background-color: #acd1af;
+    color: #000;
+    border: 3px solid #479436;
+}
+.list-of-games .isPlaying li{
+    background-color: #acd1af;
 }

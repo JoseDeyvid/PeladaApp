@@ -1,0 +1,29 @@
+.container {
+    /* background-color: var(--main-color); */
+    max-width: 425px;
+    display: flex;
+    flex-direction: column;
+    /* height: 100%; */
+    padding: 1rem;
+}
+
+.add-player {
+    padding: 1rem 0;
+    display: flex;
+    /* border: 5px solid red; */
+    justify-content: space-between;
+}
+
+.input-default {
+    padding: 1rem .4rem;
+    font-size: 20px;
+    background-color: var(--white);
+    color: #000;
+    /* border-color: var(--second-green); */
+    border-radius: 12px;
+}
+
+.input-default:focus {
+    outline: none;
+    border: 3px solid var(--dark-green);
+}

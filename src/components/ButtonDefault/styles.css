@@ -1,0 +1,13 @@
+.button-default {
+    padding: .5rem 2rem;
+    font-size: 30px;
+    border: 2px solid 	var(--dark-green);
+    border-radius: 12px;
+    color: var(--main-green);
+    background-color: var(--white);
+}
+
+.button-default:active {
+    background-color: var(--dark-green);
+    color: var(--white);
+}
