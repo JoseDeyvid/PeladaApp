@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ButtonDefault from "../ButtonDefault"
+import './styles.css'
 const Timer = ({ gameTime, setModalIsOpen }) => {
 
     const Ref = useRef(null);
@@ -91,12 +92,15 @@ const Timer = ({ gameTime, setModalIsOpen }) => {
     }
 
     return (
-        <div>
-            <h2>{timer}</h2>
-            <ButtonDefault handleClickBtn={onClickStart} btnTxt={`${Ref.current ? "Recomeçar partida" : "Iniciar partida"}`} />
-            {Ref.current && <ButtonDefault handleClickBtn={onClickPause} btnTxt={`${isPaused ? "Despausar partida" : "Pausar partida"}`} />}
-            {Ref.current && <ButtonDefault handleClickBtn={onClickFinishGame} btnTxt={"Encerrar partida!"}/>}
-            {isOpen && <ModalWhoLost setIsOpen={setIsOpen} />}
+        <div className="timer-container">
+            <h2 className="timer">{timer}</h2>
+            <div className="controls-timer">
+                <ButtonDefault handleClickBtn={onClickStart} btnTxt={`${Ref.current ? "Recomeçar partida" : "Iniciar partida"}`} />
+                {Ref.current && <ButtonDefault handleClickBtn={onClickPause} btnTxt={`${isPaused ? "Despausar partida" : "Pausar partida"}`} />}
+                {/* {Ref.current && <ButtonDefault handleClickBtn={onClickFinishGame} btnTxt={"Encerrar partida!"} />} */}
+                {Ref.current && <button className='button-default finish-game' onClick={() => onClickFinishGame()}>Encerrar partida!</button>}
+                {isOpen && <ModalWhoLost setIsOpen={setIsOpen} />}
+            </div>
         </div>
     );
 };

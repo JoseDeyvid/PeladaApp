@@ -7,3 +7,11 @@
 - Não permitir inserir jogador que já existe
 - Nao deixar inserir nome vazio
 - Deixar a primeira letra do nome sempre maiuscula
+- Tela rolar para baixo automaticamente
+- Deixar o botão de Sortear os times disabled ou sumir com ele depois de sortear os times.
+- Persistir dados em cookies
+- Pausar partida automaticamente quando encerrar partida.
+- Colocar input em um form pra enviar automaticamente.
+
+
+- Reorganizar código
