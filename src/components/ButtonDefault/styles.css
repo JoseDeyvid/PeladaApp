@@ -11,3 +11,9 @@
     background-color: var(--dark-green);
     color: var(--white);
 }
+
+.button-default:disabled {
+    background-color: #ccc;
+    color: var(--main-green);
+    opacity: 0.6;
+}

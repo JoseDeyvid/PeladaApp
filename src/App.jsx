@@ -11,7 +11,7 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(5);
+  const [playersPerTeam] = useState(2);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const inputPlayerRef = useRef();
