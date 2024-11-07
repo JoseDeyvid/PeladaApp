@@ -26,8 +26,7 @@ const ModalWhoLost = ({ handleCloseModal, teams, teamsPlayingId, handleNextGame 
                             ))}
                         </div>
                     </div>
-                    {/* <button onClick={() => handleNextGame(loserId)}>Confirmar</button> */}
-                    <div className="test">
+                    <div className="btn-container">
                         <ButtonDefault btnTxt={'Confirmar'} handleClickBtn={() => handleNextGame(loserId)} disabled={loserId === null} />
                     </div>
                 </div>

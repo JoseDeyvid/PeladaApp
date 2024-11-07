@@ -84,7 +84,7 @@
     background-color: #acd1af;
   }
 
-  .test {
+  .btn-container {
     display: flex;
     justify-content: center;
   }
