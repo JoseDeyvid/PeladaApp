@@ -5,15 +5,18 @@ import ButtonDefault from './components/ButtonDefault';
 import ListOfGames from './components/ListOfGames';
 import Timer from './components/Timer';
 import ModalWhoLost from './components/ModalWhoLost';
+import ModalEditTeam from './components/ModalEditTeam';
 
 function App() {
 
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(2);
+  const [playersPerTeam] = useState(5);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalEditTeamIsOpen, setModalEditTeamIsOpen] = useState(false);
+  const [editingTeam, setEditingTeam] = useState(null)
   const inputPlayerRef = useRef();
 
   const handleAddPlayer = () => {
@@ -26,7 +29,6 @@ function App() {
         setTeams((prevValue) => [...prevValue, [player]])
       }
     }
-    console.log(inputPlayerRef)
     inputPlayerRef.current.value = ''
     inputPlayerRef.current.focus();
 
@@ -98,9 +100,18 @@ function App() {
       </div>
       <ListOfPlayers list={listOfPlayers} />
       <ButtonDefault handleClickBtn={drawPlayers} btnTxt={"Sortear times"} disabled={teams.length > 0} />
-      <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} />
+      <ListOfGames teams={teams} handleNextGame={nextGame} teamsPlaying={teamsPlaying} setEditingTeam={setEditingTeam} setModalEditTeamIsOpen={setModalEditTeamIsOpen} />
       {teams.length > 0 && <Timer gameTime={8} setModalIsOpen={setModalIsOpen} />}
-      {modalIsOpen && <ModalWhoLost handleCloseModal={() => setModalIsOpen(false)} teams={teams} teamsPlayingId={teamsPlaying} handleNextGame={nextGame} />}
+
+      {modalIsOpen && <ModalWhoLost
+        handleCloseModal={() => setModalIsOpen(false)}
+        teams={teams}
+        teamsPlayingId={teamsPlaying}
+        handleNextGame={nextGame} />}
+
+        {modalEditTeamIsOpen && <ModalEditTeam
+        handleCloseModal={() => setModalEditTeamIsOpen(false)}
+        team={teams[editingTeam]}/>}
     </div>
   )
 }

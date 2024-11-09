@@ -1,90 +1,112 @@
 .darkBG {
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: fixed;
-  }
-  
-  .centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .modal {
-    width: 250px;
-    min-height: 300px;
-    color: white;
-    z-index: 10;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    
-  }
-  
-  .modalHeader {
-    height: 50px;
-    background: var(--main-green);
-    overflow: hidden;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
-  }
-  
-  .heading {
-    color: var(--dark-green);
-    background-color: var(--white);
-    font-weight: bold;
-    font-size: 17px;
-    text-align: center;
-    border-radius: 16px;
-    padding: 0.3rem 1rem;
-    
-  }
-  
-  .modalActions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 1rem;
-    margin: 0 .5rem;
-    gap: .3rem;
-    background-color: var(--main-green);
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+}
 
-  }
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .teamPlaying {
-    background-color: #fff;
-    color: var(--dark-green);
-    border-radius: 4px;
-    padding: .2rem;
-    cursor: pointer;
-  }
+.modal {
+  width: 250px;
+  min-height: 300px;
+  color: white;
+  z-index: 10;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
-  .teamPlaying p {
-    background-color: white;
-  }
+}
 
-  .selected {
-    background-color: #acd1af;
-    color: #000;
-    border: 3px solid #479436;
-  }
+.modalHeader {
+  height: 50px;
+  background: var(--main-green);
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+}
 
-  .selected p {
-    background-color: #acd1af;
-  }
+.heading {
+  color: var(--dark-green);
+  background-color: var(--white);
+  font-weight: bold;
+  font-size: 17px;
+  text-align: center;
+  border-radius: 16px;
+  padding: 0.3rem 1rem;
 
-  .btn-container {
-    display: flex;
-    justify-content: center;
-  }
+}
+
+.modalContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  margin: 0 .5rem;
+  gap: .3rem;
+  background-color: var(--main-green);
+
+}
+
+.teamPlaying {
+  background-color: #fff;
+  color: var(--dark-green);
+  border-radius: 4px;
+  padding: .2rem;
+  cursor: pointer;
+}
+
+.teamPlaying p {
+  background-color: white;
+}
+
+.selected {
+  background-color: #acd1af;
+  color: #000;
+  border: 3px solid #479436;
+}
+
+.selected p {
+  background-color: #acd1af;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.editTeamContent {
+  /* border: 5px solid blue; */
+  display: flex;
+  justify-content: center;
+  /* background-color: #fff; */
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  /* gap: .2rem; */
+}
+
+.players p {
+  color: #000;
+  background-color: #fff;
+  padding: .4rem;
+  border: 2px solid #000;
+  font-size: 20px;
+}

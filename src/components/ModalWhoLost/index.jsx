@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { RiCloseLine } from "react-icons/ri"
 import "./styles.css"
 import ButtonDefault from '../ButtonDefault';
 
@@ -14,7 +13,7 @@ const ModalWhoLost = ({ handleCloseModal, teams, teamsPlayingId, handleNextGame 
                     <div className="modalHeader">
                         <h5 className="heading">Selecione quem ganhou</h5>
                     </div>
-                    <div className="modalActions">
+                    <div className="modalContent">
                         <div className={`teamPlaying ${loserId === teamsPlayingId[1] ? "selected" : ""}`} onClick={() => setLoserId(teamsPlayingId[1])}>
                             {teams[teamsPlayingId[0]].map((player, i) => (
                                 <p key={i}>{player}</p>

@@ -1,10 +1,15 @@
 import "./styles.css"
 
-const ListOfGames = ({ teams, teamsPlaying }) => {
+const ListOfGames = ({ teams, teamsPlaying, setModalEditTeamIsOpen, setEditingTeam }) => {
+
+    const handleClickTeam = (id) => {
+        setModalEditTeamIsOpen(true);
+        setEditingTeam(id)
+    }
     return (
         <div className='list-of-games'>
             {teams.map((team, i) => (
-                <ul key={i} className={`${teamsPlaying.includes(i) ? "isPlaying" : ""}`}>
+                <ul key={i} className={`${teamsPlaying.includes(i) ? "isPlaying" : ""}`} onClick={() => handleClickTeam(i) }>
                     {team.map((player, i) => (
                         <li key={i}>{i + 1} - {player}</li>
                     ))}

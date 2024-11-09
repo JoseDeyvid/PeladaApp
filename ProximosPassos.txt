@@ -1,17 +1,23 @@
-- Resetar tudo
-- Adicionar opcao de tirar jogador
-- Corrigir bug do valor do input ficar salvo por conta do setState e useRef
-- Se empatar, app sorteia o time
+Validações
 - Necessário pelo menos 2 times para fazer sorteio
-- Adicionar opção de voltar a ação
 - Não permitir inserir jogador que já existe
 - Nao deixar inserir nome vazio
 - Deixar a primeira letra do nome sempre maiuscula
-- Tela rolar para baixo automaticamente
-- Deixar o botão de Sortear os times disabled ou sumir com ele depois de sortear os times.
-- Persistir dados em cookies
+- Deixar o botão de Sortear o times disabled ou sumir com ele depois de sortear os times.
+
+Correções
+- Corrigir bug do valor do input ficar salvo por conta do setState e useRef
 - Pausar partida automaticamente quando encerrar partida.
 - Colocar input em um form pra enviar automaticamente.
+
+Novas funcionalidades
+- Resetar tudo
+- Adicionar opcao de tirar jogador
+- Se empatar, app sorteia o time
+- Adicionar opção de voltar a ação
+- Tela rolar para baixo automaticamente
+- Persistir dados em cookies
+
 
 
 - Reorganizar código
