@@ -6,6 +6,7 @@ import ListOfGames from './components/ListOfGames';
 import Timer from './components/Timer';
 import ModalWhoLost from './components/ModalWhoLost';
 import ModalEditTeam from './components/ModalEditTeam';
+import ModalEditPlayer from './components/ModalEditPlayer';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalEditTeamIsOpen, setModalEditTeamIsOpen] = useState(false);
   const [editingTeam, setEditingTeam] = useState(null)
+  const [playerBeingEdited, setPlayerBeingEdited] = useState(null)
   const inputPlayerRef = useRef();
 
   const handleAddPlayer = () => {
@@ -109,9 +111,12 @@ function App() {
         teamsPlayingId={teamsPlaying}
         handleNextGame={nextGame} />}
 
-        {modalEditTeamIsOpen && <ModalEditTeam
+      {modalEditTeamIsOpen && <ModalEditTeam
         handleCloseModal={() => setModalEditTeamIsOpen(false)}
-        team={teams[editingTeam]}/>}
+        team={teams[editingTeam]}
+        setPlayerBeingEdited={setPlayerBeingEdited} />}
+
+        {playerBeingEdited && <ModalEditPlayer player={playerBeingEdited} handleCloseModal={() => setPlayerBeingEdited(null)} />}
     </div>
   )
 }

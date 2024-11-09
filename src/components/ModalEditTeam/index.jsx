@@ -1,8 +1,7 @@
 import React from 'react'
 import "../ModalWhoLost/styles.css"
-import ButtonDefault from '../ButtonDefault';
 
-const ModalEditTeam = ({ team, handleCloseModal }) => {
+const ModalEditTeam = ({ team, handleCloseModal, setPlayerBeingEdited }) => {
 
     return (
         <>
@@ -15,13 +14,10 @@ const ModalEditTeam = ({ team, handleCloseModal }) => {
                     <div className="editTeamContent">
                         <div className={"players"}>
                             {team.map((player, i) => (
-                                <p key={i}>{player}</p>
+                                <p onClick={() => setPlayerBeingEdited(player)} key={i}>{player}</p>
                             ))}
                         </div>
                     </div>
-                    {/* <div className="btn-container">
-                        <ButtonDefault btnTxt={'Confirmar'} handleClickBtn={() => handleNextGame(loserId)} disabled={loserId === null} />
-                    </div> */}
                 </div>
             </div>
         </>
