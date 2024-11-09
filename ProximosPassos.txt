@@ -17,6 +17,7 @@ Novas funcionalidades
 - Adicionar opção de voltar a ação
 - Tela rolar para baixo automaticamente
 - Persistir dados em cookies
+- Permitir alterar nome antes de sortear os times
 
 
 

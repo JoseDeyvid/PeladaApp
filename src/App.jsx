@@ -13,7 +13,7 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(5);
+  const [playersPerTeam] = useState(2);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalEditTeamIsOpen, setModalEditTeamIsOpen] = useState(false);
@@ -86,6 +86,20 @@ function App() {
     }
   }
 
+  const changePlayerName = (newName) => {
+    setTeams((prevTeams) => prevTeams.map((team) => {
+      if (team === teams[editingTeam]) {
+        return team.map((player) => {
+          if (player === playerBeingEdited) {
+            return newName
+          }
+          return player
+        })
+      }
+      return team
+    }))
+  }
+
   return (
 
     <div className='container'>
@@ -116,9 +130,10 @@ function App() {
         team={teams[editingTeam]}
         setPlayerBeingEdited={setPlayerBeingEdited} />}
 
-        {playerBeingEdited && <ModalEditPlayer player={playerBeingEdited} handleCloseModal={() => setPlayerBeingEdited(null)} />}
+      {playerBeingEdited && <ModalEditPlayer player={playerBeingEdited} handleCloseModal={() => setPlayerBeingEdited(null)} changePlayerName={changePlayerName} />}
     </div>
   )
+
 }
 
 export default App
