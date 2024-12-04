@@ -13,7 +13,7 @@ function App() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [player, setPlayer] = useState("")
   const [teams, setTeams] = useState([]);
-  const [playersPerTeam] = useState(2);
+  const [playersPerTeam] = useState(5);
   const [teamsPlaying, setTeamsPlaying] = useState([0, 1]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalEditTeamIsOpen, setModalEditTeamIsOpen] = useState(false);
@@ -100,6 +100,111 @@ function App() {
     }))
   }
 
+  const deletePlayer = (name) => {
+    let newTeams = teams
+
+    if (listOfPlayers.length > playersPerTeam * 2) {
+      if (teams[teamsPlaying[0]].includes(name)) {
+        console.log("Caiu no if")
+        const index = newTeams[teamsPlaying[0]].indexOf(name);
+        for (let i = index; i < playersPerTeam; i++) {
+          if (i === playersPerTeam - 1) {
+            if (newTeams[teamsPlaying[1] + 1][0]) {
+              newTeams[teamsPlaying[0]][i] = newTeams[teamsPlaying[1] + 1][0]
+            } else {
+              newTeams[teamsPlaying[0]].pop()
+            }
+          } else {
+            if (newTeams[teamsPlaying[0]][i + 1]) {
+              newTeams[teamsPlaying[0]][i] = newTeams[teamsPlaying[0]][i + 1]
+            } else {
+              newTeams[teamsPlaying[0]].pop()
+            }
+          }
+
+
+        }
+        for (let i = teamsPlaying[1] + 1; i < teams.length; i++) {
+          for (let j = 0; j < newTeams[i].length; j++) {
+            if (j === newTeams[i].length - 1) {
+              if (i + 1 < newTeams.length) {
+                newTeams[i][j] = newTeams[i + 1][0]
+              } else {
+                newTeams[i].pop();
+              }
+
+            } else {
+              if (newTeams[i][j + 1]) {
+                newTeams[i][j] = newTeams[i][j + 1]
+              } else {
+                if (j === playersPerTeam - 2) {
+
+                  newTeams[i].pop();
+                }
+              }
+
+            }
+
+          }
+
+        }
+      } else {
+        for (let i = teamsPlaying[1]; i < newTeams.length; i++) {
+          if (newTeams[i].includes(name)) {
+            const index = newTeams[i].indexOf(name);
+            for (let j = index; j < newTeams[i].length; j++) {
+              if (j === newTeams[i].length - 1) {
+                if (i + 1 < newTeams.length) {
+                  console.log("Caiu no else1")
+                  newTeams[i][j] = newTeams[i + 1][0]
+                } else {
+                  console.log("Caiu no else2")
+                  newTeams[i].pop()
+                }
+              } else {
+                if (newTeams[i][j + 1]) {
+                  console.log("Caiu no else3")
+                  newTeams[i][j] = newTeams[i][j + 1]
+                } else {
+                  console.log("Caiu no else4")
+                  newTeams[i].pop()
+                }
+              }
+
+
+            }
+
+            for (let j = i + 1; j < newTeams.length; j++) {
+              for (let k = 0; k < newTeams[j].length; k++) {
+                if (k === newTeams[j].length - 1) {
+                  if (j + 1 < newTeams.length) {
+                    newTeams[j][k] = newTeams[j + 1][0]
+                  } else {
+                    newTeams[j].pop();
+                  }
+
+                } else {
+                  if (newTeams[j][k + 1]) {
+                    newTeams[j][k] = newTeams[j][k + 1]
+                  } else {
+                    if (k === playersPerTeam - 2) {
+                      newTeams[j].pop();
+                    }
+                  }
+
+                }
+
+              }
+
+            }
+          }
+
+        }
+      }
+    }
+    setTeams([...newTeams]);
+  }
+
   return (
 
     <div className='container'>
@@ -130,7 +235,11 @@ function App() {
         team={teams[editingTeam]}
         setPlayerBeingEdited={setPlayerBeingEdited} />}
 
-      {playerBeingEdited && <ModalEditPlayer player={playerBeingEdited} handleCloseModal={() => setPlayerBeingEdited(null)} changePlayerName={changePlayerName} />}
+      {playerBeingEdited && <ModalEditPlayer
+        player={playerBeingEdited}
+        handleCloseModal={() => setPlayerBeingEdited(null)}
+        changePlayerName={changePlayerName}
+        deletePlayer={deletePlayer} />}
     </div>
   )
 

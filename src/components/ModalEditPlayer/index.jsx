@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import "../ModalWhoLost/styles.css"
 
-const ModalEditPlayer = ({ player, handleCloseModal, changePlayerName }) => {
+const ModalEditPlayer = ({ player, handleCloseModal, changePlayerName, deletePlayer }) => {
 
     const [playerEdited, setPlayerEdited] = useState(player)
 
     const handleClickSave = () => {
         handleCloseModal();
         changePlayerName(playerEdited);
+    }
+    const handleClickDelete = () => {
+        handleCloseModal();
+        deletePlayer(player);
     }
 
     return (
@@ -23,7 +27,7 @@ const ModalEditPlayer = ({ player, handleCloseModal, changePlayerName }) => {
                             <p>{player}</p>
                             <input type="text" value={playerEdited} onChange={(e) => setPlayerEdited(e.target.value)} />
                             <button onClick={handleClickSave}>Salvar</button>
-                            <button>Excluir jogador</button>
+                            <button onClick={handleClickDelete}>Excluir jogador</button>
                         </div>
                     </div>
                 </div>
