@@ -131,17 +131,22 @@ function App() {
                 newTeams[i][j] = newTeams[i + 1][0]
               } else {
                 newTeams[i].pop();
+                if (newTeams[i].length === 0) {
+                  newTeams.pop();
+                  break;
+                }
               }
 
             } else {
-              if (newTeams[i][j + 1]) {
-                newTeams[i][j] = newTeams[i][j + 1]
-              } else {
-                if (j === playersPerTeam - 2) {
-
-                  newTeams[i].pop();
-                }
-              }
+              // Acredito que esse codigo seja desnecessário
+              // if (newTeams[i][j + 1]) {
+              newTeams[i][j] = newTeams[i][j + 1]
+              // } else {
+              //   if (j === playersPerTeam - 2) {
+              //     console.log("Caiu aqui!")
+              //     newTeams[i].pop();
+              //   }
+              // }
 
             }
 
@@ -160,15 +165,23 @@ function App() {
                 } else {
                   console.log("Caiu no else2")
                   newTeams[i].pop()
+                  if (newTeams[i].length === 0) {
+                    setPlayerBeingEdited(null);
+                    setModalEditTeamIsOpen(false);
+                    setModalIsOpen(false)
+                    newTeams.pop();
+                    break;
+                  }
                 }
               } else {
-                if (newTeams[i][j + 1]) {
-                  console.log("Caiu no else3")
-                  newTeams[i][j] = newTeams[i][j + 1]
-                } else {
-                  console.log("Caiu no else4")
-                  newTeams[i].pop()
-                }
+                // Acredito que esse codigo seja desnecessário
+                // if (newTeams[i][j + 1]) {
+                //   console.log("Caiu no else3")
+                newTeams[i][j] = newTeams[i][j + 1]
+                // } else {
+                //   console.log("Caiu no else4")
+                //   newTeams[i].pop()
+                // }
               }
 
 
@@ -181,16 +194,24 @@ function App() {
                     newTeams[j][k] = newTeams[j + 1][0]
                   } else {
                     newTeams[j].pop();
+                    if (newTeams[j].length === 0) {
+                      setPlayerBeingEdited(null)
+                      setModalEditTeamIsOpen(false);
+                      setModalIsOpen(false)
+                      newTeams.pop();
+                      break;
+                    }
                   }
 
                 } else {
-                  if (newTeams[j][k + 1]) {
-                    newTeams[j][k] = newTeams[j][k + 1]
-                  } else {
-                    if (k === playersPerTeam - 2) {
-                      newTeams[j].pop();
-                    }
-                  }
+                  // Acredito que esse código seja desnecessário
+                  // if (newTeams[j][k + 1]) {
+                  newTeams[j][k] = newTeams[j][k + 1]
+                  // } else {
+                  //   if (k === playersPerTeam - 2) {
+                  //     newTeams[j].pop();
+                  //   }
+                  // }
 
                 }
 
