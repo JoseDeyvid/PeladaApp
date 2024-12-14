@@ -1,19 +1,23 @@
 :root {
-    --main-green: #315e26;
-    --second-green: #315a39;
-    --white: #fff;
-    --black: #000;
-    --dark-green: #2d3f29;
+  --main-green: #315e26;
+  --second-green: #315a39;
+  --white: #fff;
+  --black: #000;
+  --dark-green: #2d3f29;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    background-color: var(--main-green);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--main-green);
 }
 
 ul {
-    list-style-type: none;
-    border: 1px solid var(--dark-green);
+  list-style-type: none;
+  border: 1px solid var(--dark-green);
+}
+
+li {
+  text-transform: capitalize;
 }

@@ -40,7 +40,14 @@ function App() {
   };
 
   const handleAddPlayer = () => {
-    setListOfPlayers([...listOfPlayers, player]);
+    let playerAlreadyExists = false;
+    if (!player.trim() || listOfPlayers.includes(player.toLowerCase())) return;
+    teams.forEach((team) => {
+      if (team.includes(player)) playerAlreadyExists = true;
+    });
+    if (playerAlreadyExists) return;
+
+    setListOfPlayers([...listOfPlayers, player.toLowerCase()]);
     saveInLS("@listOfPlayers", [...listOfPlayers, player]);
     if (teams.length !== 0) {
       if (teams[teams.length - 1].length < playersPerTeam) {
@@ -167,7 +174,6 @@ function App() {
 
     if (listOfPlayers.length > playersPerTeam * 2) {
       if (teams[teamsPlaying[0]].includes(name)) {
-        console.log("Caiu no if");
         const index = newTeams[teamsPlaying[0]].indexOf(name);
         for (let i = index; i < playersPerTeam; i++) {
           if (i === playersPerTeam - 1) {
@@ -197,15 +203,7 @@ function App() {
                 }
               }
             } else {
-              // Acredito que esse codigo seja desnecessário
-              // if (newTeams[i][j + 1]) {
               newTeams[i][j] = newTeams[i][j + 1];
-              // } else {
-              //   if (j === playersPerTeam - 2) {
-              //     console.log("Caiu aqui!")
-              //     newTeams[i].pop();
-              //   }
-              // }
             }
           }
         }
@@ -216,10 +214,8 @@ function App() {
             for (let j = index; j < newTeams[i].length; j++) {
               if (j === newTeams[i].length - 1) {
                 if (i + 1 < newTeams.length) {
-                  console.log("Caiu no else1");
                   newTeams[i][j] = newTeams[i + 1][0];
                 } else {
-                  console.log("Caiu no else2");
                   newTeams[i].pop();
                   if (newTeams[i].length === 0) {
                     setPlayerBeingEdited(null);
@@ -324,6 +320,8 @@ function App() {
           timer={timer}
           setTimer={setTimer}
           Ref={Ref}
+          teams={teams}
+          playersPerTeam={playersPerTeam}
         />
       )}
       {modalIsOpen && (

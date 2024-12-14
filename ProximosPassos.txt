@@ -1,9 +1,4 @@
 Validações
-- Necessário pelo menos 2 times para fazer sorteio
-- Não permitir inserir jogador que já existe
-- Nao deixar inserir nome vazio
-- Deixar a primeira letra do nome sempre maiuscula
-- Deixar o botão de Sortear o times disabled ou sumir com ele depois de sortear os times.
 - Fazer dupla verificacao pro usuario antes dele reiniciar a pelada
 
 Correções

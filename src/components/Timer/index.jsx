@@ -1,7 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import ButtonDefault from "../ButtonDefault";
 import "./styles.css";
-const Timer = ({ gameTime, setModalIsOpen, timer, setTimer, Ref }) => {
+const Timer = ({
+  gameTime,
+  setModalIsOpen,
+  timer,
+  setTimer,
+  Ref,
+  teams,
+  playersPerTeam,
+}) => {
   const [isPaused, setIsPaused] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,9 +61,14 @@ const Timer = ({ gameTime, setModalIsOpen, timer, setTimer, Ref }) => {
   };
 
   const onClickStart = () => {
-    clearTimer(getDeadTime({ seconds: gameTime }));
-    setIsPaused(false);
-    setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
+    console.log(teams);
+    if (teams.length >= 2 && teams[1].length === playersPerTeam) {
+      clearTimer(getDeadTime({ seconds: gameTime }));
+      setIsPaused(false);
+      setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
+    } else {
+      console.log("Impossivel comelar a aprtida");
+    }
   };
 
   const onClickPause = () => {

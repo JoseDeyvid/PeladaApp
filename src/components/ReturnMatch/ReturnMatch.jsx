@@ -15,8 +15,6 @@ const ReturnMatch = ({
       historyOfMatchs[historyOfMatchs.length - 1][0] !== teamsPlaying[0] ||
       historyOfMatchs[historyOfMatchs.length - 1][1] !== teamsPlaying[1]
     ) {
-      console.log("History: ", historyOfMatchs[historyOfMatchs.length - 1]);
-      console.log("teamsPlaying: ", teamsPlaying);
       setHistoryOfMatchs([...historyOfMatchs, teamsPlaying]);
       localStorage.setItem(
         "@historyOfMatchs",
@@ -44,7 +42,6 @@ const ReturnMatch = ({
       for (let i = 0; i < playersToRemove; i++) {
         teams[teams.length - 1].pop();
       }
-      console.log(historyOfMatchs);
       saveInLS("@historyOfMatchs", historyOfMatchs);
       saveInLS("@teams", teams);
     }
