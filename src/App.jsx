@@ -41,7 +41,10 @@ function App() {
 
   const handleAddPlayer = () => {
     let playerAlreadyExists = false;
-    if (!player.trim() || listOfPlayers.includes(player.toLowerCase())) return;
+    if (!player.trim() || listOfPlayers.includes(player.toLowerCase())) {
+      alert("Não é possível inserir um nome vazio ou que já existe!");
+      return;
+    }
     teams.forEach((team) => {
       if (team.includes(player)) playerAlreadyExists = true;
     });
@@ -117,6 +120,7 @@ function App() {
       saveInLS("@teams", [...teams, [...team]]);
     }
     setModalIsOpen(false);
+    Ref.current = null;
     redefineTeamsPlaying(teamId);
   };
 
@@ -259,16 +263,22 @@ function App() {
   };
 
   const resetAllHandler = () => {
-    setListOfPlayers([]);
-    setPlayer("");
-    setTeams([]);
-    setTeamsPlaying([0, 1]);
-    setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
-    if (Ref.current) clearInterval(Ref.current);
-    saveInLS("@listOfPlayers", []);
-    saveInLS("@teams", []);
-    saveInLS("@teamsPlaying", [0, 1]);
-    saveInLS("@historyOfMatchs", [[0, 1]]);
+    if (
+      confirm(
+        "Essa ação resetará todos os dados e você terá que iniciar a pelada do zero. Tem certeza disso?"
+      )
+    ) {
+      setListOfPlayers([]);
+      setPlayer("");
+      setTeams([]);
+      setTeamsPlaying([0, 1]);
+      setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
+      if (Ref.current) clearInterval(Ref.current);
+      saveInLS("@listOfPlayers", []);
+      saveInLS("@teams", []);
+      saveInLS("@teamsPlaying", [0, 1]);
+      saveInLS("@historyOfMatchs", [[0, 1]]);
+    }
   };
 
   return (

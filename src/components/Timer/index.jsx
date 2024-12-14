@@ -61,13 +61,14 @@ const Timer = ({
   };
 
   const onClickStart = () => {
-    console.log(teams);
     if (teams.length >= 2 && teams[1].length === playersPerTeam) {
       clearTimer(getDeadTime({ seconds: gameTime }));
       setIsPaused(false);
       setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
     } else {
-      console.log("Impossivel comelar a aprtida");
+      alert(
+        "É necessário pelo menos 2 times completos para iniciar a partida!"
+      );
     }
   };
 
@@ -91,6 +92,7 @@ const Timer = ({
   const onClickFinishGame = () => {
     setModalIsOpen(true);
     clearInterval(Ref.current);
+    setIsPaused(true);
   };
 
   return (
@@ -107,7 +109,6 @@ const Timer = ({
             btnTxt={`${isPaused ? "Despausar partida" : "Pausar partida"}`}
           />
         )}
-        {/* {Ref.current && <ButtonDefault handleClickBtn={onClickFinishGame} btnTxt={"Encerrar partida!"} />} */}
         {Ref.current && (
           <button
             className="button-default finish-game"

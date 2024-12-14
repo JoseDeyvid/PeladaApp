@@ -2,9 +2,7 @@ Validações
 - Fazer dupla verificacao pro usuario antes dele reiniciar a pelada
 
 Correções
-- Corrigir bug do valor do input ficar salvo por conta do setState e useRef
 - Pausar partida automaticamente quando encerrar partida.
-- Colocar input em um form pra enviar automaticamente.
 - Corrigir bug que ocorre quando adiciona um jogador e depois retroce as partidas para antes desse jogador ter sido adicionado.
 
 Novas funcionalidades
