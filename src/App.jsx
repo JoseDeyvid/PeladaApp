@@ -48,7 +48,10 @@ function App() {
     teams.forEach((team) => {
       if (team.includes(player)) playerAlreadyExists = true;
     });
-    if (playerAlreadyExists) return;
+    if (playerAlreadyExists) {
+      alert("Não é possível inserir um nome vazio ou que já existe!");
+      return;
+    }
 
     setListOfPlayers([...listOfPlayers, player.toLowerCase()]);
     saveInLS("@listOfPlayers", [...listOfPlayers, player]);
@@ -176,7 +179,6 @@ function App() {
 
   const deletePlayer = (name) => {
     let newTeams = teams;
-
     if (listOfPlayers.length > playersPerTeam * 2) {
       if (teams[teamsPlaying[0]].includes(name)) {
         const index = newTeams[teamsPlaying[0]].indexOf(name);
@@ -358,6 +360,8 @@ function App() {
           handleCloseModal={() => setPlayerBeingEdited(null)}
           changePlayerName={changePlayerName}
           deletePlayer={deletePlayer}
+          listOfPlayers={listOfPlayers}
+          teams={teams}
         />
       )}
     </div>

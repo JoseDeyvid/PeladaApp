@@ -1,0 +1,52 @@
+.player {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.player p {
+  margin: 0.5rem;
+  font-size: 20px;
+}
+
+.player input {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0.4rem;
+  font-size: 20px;
+  background-color: var(--white);
+  color: #000;
+  border-radius: 12px;
+}
+
+.player input:focus {
+  outline: none;
+  border: 3px solid var(--dark-green);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button {
+  padding: 0.5rem;
+  font-size: 16px;
+  border: 2px solid var(--dark-green);
+  border-radius: 12px;
+  color: var(--main-green);
+  background-color: var(--white);
+}
+
+.actions button:active {
+  background-color: var(--dark-green);
+  color: var(--white);
+}
+
+.actions .finish-game {
+  background-color: rgb(208, 35, 35);
+  color: #fff;
+}
+
+.actions .finish-game:hover {
+  background-color: rgb(169, 42, 42);
+}
