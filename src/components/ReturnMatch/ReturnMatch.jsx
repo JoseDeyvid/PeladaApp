@@ -1,3 +1,5 @@
+import "./styles.css";
+
 import React, { useEffect, useState } from "react";
 import { BsArrowReturnLeft } from "react-icons/bs";
 
@@ -32,24 +34,26 @@ const ReturnMatch = ({
 
   const returnMatchOnHandler = () => {
     if (historyOfMatchs.length > 1) {
-      historyOfMatchs.pop();
-      setTeamsPlaying(historyOfMatchs[historyOfMatchs.length - 1]);
-      saveInLS("@teamsPlaying", historyOfMatchs[historyOfMatchs.length - 1]);
+      if (confirm("Tem certeza que deseja retroceder uma partida?")) {
+        historyOfMatchs.pop();
+        setTeamsPlaying(historyOfMatchs[historyOfMatchs.length - 1]);
+        saveInLS("@teamsPlaying", historyOfMatchs[historyOfMatchs.length - 1]);
 
-      const playersToRemove = playersPerTeam - teams[teams.length - 1].length;
-      teams.pop();
+        const playersToRemove = playersPerTeam - teams[teams.length - 1].length;
+        teams.pop();
 
-      for (let i = 0; i < playersToRemove; i++) {
-        teams[teams.length - 1].pop();
+        for (let i = 0; i < playersToRemove; i++) {
+          teams[teams.length - 1].pop();
+        }
+        saveInLS("@historyOfMatchs", historyOfMatchs);
+        saveInLS("@teams", teams);
       }
-      saveInLS("@historyOfMatchs", historyOfMatchs);
-      saveInLS("@teams", teams);
     }
   };
 
   return (
-    <div>
-      <button onClick={returnMatchOnHandler}>
+    <div className="returnMatchContainer">
+      <button onClick={returnMatchOnHandler} className="btnReturnMatch">
         <BsArrowReturnLeft />
       </button>
     </div>

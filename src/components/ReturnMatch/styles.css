@@ -1,0 +1,46 @@
+.returnMatchContainer {
+  display: flex;
+  justify-content: end;
+}
+.btnReturnMatch {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: var(--white);
+  border-radius: 6px;
+  border: 2px solid var(--dark-green);
+}
+
+.btnReturnMatch svg {
+  fill: var(--main-green);
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+}
+
+.btnReturnMatch:active {
+  background-color: var(--dark-green);
+}
+.btnReturnMatch:active svg {
+  background-color: var(--dark-green);
+  fill: var(--white);
+}
+
+/* .button-default {
+    padding: .5rem 2rem;
+    font-size: 30px;
+    border: 2px solid 	var(--dark-green);
+    border-radius: 12px;
+    color: var(--main-green);
+    background-color: var(--white);
+}
+
+.button-default:active {
+    background-color: var(--dark-green);
+    color: var(--white);
+}
+
+.button-default:disabled {
+    background-color: #ccc;
+    color: var(--main-green);
+    opacity: 0.6;
+} */

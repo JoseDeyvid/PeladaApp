@@ -121,6 +121,7 @@ function App() {
     }
     setModalIsOpen(false);
     Ref.current = null;
+    setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
     redefineTeamsPlaying(teamId);
   };
 

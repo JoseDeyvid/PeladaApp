@@ -62,7 +62,7 @@ const Timer = ({
 
   const onClickStart = () => {
     if (teams.length >= 2 && teams[1].length === playersPerTeam) {
-      clearTimer(getDeadTime({ seconds: gameTime }));
+      clearTimer(getDeadTime({ minutes: gameTime }));
       setIsPaused(false);
       setTimer(`00:${gameTime > 9 ? gameTime : "0" + gameTime}:00`);
     } else {
